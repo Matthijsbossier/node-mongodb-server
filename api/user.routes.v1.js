@@ -9,6 +9,8 @@ var User = require('../model/user.model');
 //
 // Geef een lijst van alle users.
 //
+
+// afhandeling van de Promise: find().then().catch()
 routes.get('/users', function(req, res) {
     res.contentType('application/json');
     User.find({})
