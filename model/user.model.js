@@ -36,5 +36,12 @@ const user = new User({
     ]
 }).save();
 
+// const recipe = new Recipe({
+//     name: 'Pizza salami',
+//     description: 'Test recipe',
+//     imagePath: 'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/frying-pan-pizza-easy-recipe-collection.jpg',
+//     ingredients: [{ name: 'Pizzabodem'}] 
+// })
+
 // alles wat naar buiten toe wordt geexporteerd:
 module.exports = User;
