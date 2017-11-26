@@ -1,7 +1,7 @@
 /**
  * Created by dkroeske on 07/05/2017.
  */
-
+//test
 var settings = require('../config/config.json');
 const moment = require('moment');
 const jwt = require('jwt-simple');
