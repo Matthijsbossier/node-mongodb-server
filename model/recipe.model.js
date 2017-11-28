@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // definitie van je database:
 const RecipeSchema = new Schema({
-    _id: String,
+    //_id: String,
     name: String,
     description: String,
     imagePath: String,
