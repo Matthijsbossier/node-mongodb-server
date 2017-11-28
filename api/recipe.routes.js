@@ -20,7 +20,7 @@ routes.get('/recipes', function(req, res)
 });
 
 // Specifiek recept op _id opvragen.
-routes.get('/recipe/:id', function(req, res)
+routes.get('/recipes/:id', function(req, res)
 {
     Recipe.findById(req.params.id, (err, recipe) => 
     {  

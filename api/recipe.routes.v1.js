@@ -39,7 +39,17 @@ routes.get('/recipes/:id', function(req, res) {
 // Voeg een user toe. De nieuwe info wordt gestuurd via de body van de request message.
 // Vorm van de URL: POST http://hostname:3000/api/v1/users
 //
-routes.post('/users', function(req, res) {
+routes.post('/recipes', function(req, res) {
+        let recipe = new Recipe(req.body);  
+    recipe.save((err, createdRecipeObject) => 
+    {  
+        if (err) 
+        {
+            res.status(500).send(err);
+        }
+
+        res.status(200).send(createdRecipeObject);
+    });
 
 });
 
