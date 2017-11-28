@@ -1,60 +1,52 @@
-//
-// ./api/v1/ingredients.routes.v1.js
-//
-var express = require('express');
-var routes = express.Router();
-var mongodb = require('../config/mongo.db');
-var User = require('../model/ingredient.model');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-//
-// Geef een lijst van alle ingredienten
-//
-routes.get('/shopping-list', function(req, res) {
-    res.contentType('application/json');
-    User.find({})
-        .then((ingredients) => {
-            // console.log(ingredients);
-            res.status(200).json(ingredients);
-        })
-        .catch((error) => res.status(401).json(error));
+// definitie van je database:
+const RecipeSchema = new Schema({
+    _id: String,
+    name: String,
+    description: String,
+    imagePath: String,
+    ingredients
+    : [{
+            name: String,
+            amount: Number,
+     }]
+}, {
+    timestamps: true
 });
 
-//
-// Retourneer één specifieke users. Hier maken we gebruik van URL parameters.
-// Vorm van de URL: http://hostname:3000/api/v1/users/23
-//
-routes.get('/shopping-list/:id', function(req, res) {   
 
-});
+const Recipe = mongoose.model('recipe', RecipeSchema);
 
-//
-// Voeg een user toe. De nieuwe info wordt gestuurd via de body van de request message.
-// Vorm van de URL: POST http://hostname:3000/api/v1/users
-//
-routes.post('/shopping-list', function(req, res) {
+// Add a 'dummy' user (every time you require this file!)
+// const  = new User({
+//     name: 'Joe',
+//     title: 'Mr.',
+//     recipes: [
+//         {name: 'Pizza salami', 
+//             ingredients : [
+//             {name: 'pizzabodem', weight: 200, price: '2.50'},
+//             {name: 'tomatensaus', weight: 100, price: '1.50'},
+//             {name: 'kaas + salami', weight: 100, price: '3.50'}
+//             ]
+//         }
 
-});
+//     ]
+// }).save();
 
-//
-// Wijzig een bestaande user. De nieuwe info wordt gestuurd via de body van de request message.
-// Er zijn twee manieren om de id van de users mee te geven: via de request parameters (doen we hier)
-// of als property in de request body.
-// 
-// Vorm van de URL: PUT http://hostname:3000/api/v1/users/23
-//
-routes.put('/shopping-list/:id', function(req, res) {
+const recipe = new Recipe({
+    name: 'Pizza salami',
+    description: 'Test recipe',
+    imagePath: 'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/frying-pan-pizza-easy-recipe-collection.jpg',
+    ingredients: [
+        { name: 'Pizzabodem', amount: 1},
+        { name: 'Kaas', amount: 1},
+        { name: 'Tomatensaus', amount: 1},
+        { name: 'Salami', amount: 5},
+        ] 
+}).save();
 
-});
 
-//
-// Verwijder een bestaande user.
-// Er zijn twee manieren om de id van de users mee te geven: via de request parameters (doen we hier)
-// of als property in de request body.
-// 
-// Vorm van de URL: DELETE http://hostname:3000/api/v1/users/23
-//
-routes.delete('/shopping-list/:id', function(req, res) {
-
-});
-
-module.exports = routes;
+// alles wat naar buiten toe wordt geexporteerd:
+module.exports = Recipe;
