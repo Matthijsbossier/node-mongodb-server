@@ -47,6 +47,5 @@ const recipe = new Recipe({
         ] 
 }).save();
 
-
 // alles wat naar buiten toe wordt geexporteerd:
 module.exports = Recipe;
