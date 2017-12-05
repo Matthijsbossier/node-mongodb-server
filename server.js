@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 var logger = require('morgan');
 var mongodb = require('./config/mongo.db');
 var reciperoutes = require('./api/recipe.routes');
+var shoppingroutes = require('./api/shopping-list.routes');
 var config = require('./config/env/env');
 
 // Express.
@@ -48,6 +49,7 @@ app.use(function (req, res, next) {
 
 // Installeer de routers.
 app.use('/api/v1', reciperoutes);
+app.use('/api/v2', shoppingroutes);
 
 // Errorhandler voor express-jwt errors
 // Wordt uitgevoerd wanneer err != null; anders door naar next().

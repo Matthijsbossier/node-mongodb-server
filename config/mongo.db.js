@@ -1,13 +1,15 @@
+// Setup.
 const mongoose = require('mongoose');
 const config = require('./env/env');
 
-// Gebruik es6 promises ipv mongoose mpromise
+// Gebruik ES6 promises i.p.v. Mongoose mpromise.
 mongoose.Promise = global.Promise;
 
 mongoose.connect(config.dburl);
 var connection = mongoose.connection
     .once('open', () => console.log('Connected to Mongo on ' + config.dburl))
-    .on('error', (error) => {
+    .on('error', (error) => 
+    {
         console.warn('Warning', error.toString());
     });
 
