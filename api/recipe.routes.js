@@ -20,7 +20,7 @@ routes.get('/recipes', function(req, res)
 });
 
 // Specifiek recept op _id opvragen.
-routes.get('/recipe/:id', function(req, res)
+routes.get('/recipes/:id', function(req, res)
 {
     Recipe.findById(req.params.id, (err, recipe) => 
     {  
@@ -45,15 +45,17 @@ routes.get('/recipe/:id', function(req, res)
 routes.post('/createrecipe', function(req, res) 
 {
     let recipe = new Recipe(req.body);  
-    recipe.save((err, createdRecipeObject) => 
-    {  
-        if (err) 
-        {
-            res.status(500).send(err);
-        }
+    //recipe.save((err, createdRecipeObject) => 
+    // {  
+    //     if (err) 
+    //     {
+    //         res.status(500).send(err);
+    //     }
 
-        res.status(200).send(createdRecipeObject);
-    });
+        //res.status(200).send(createdRecipeObject);
+    //});
+    res.status(200).send(req.body);
+    recipe.save();
 });
 
 // Bewerkt recept.
@@ -67,6 +69,7 @@ routes.put('/editrecipe/:id', function(req, res)
             // Update each attribute with any possible attribute that may have been submitted in the body of the request
             // If that attribute isn't in the request body, default back to whatever it was before.
             
+            //recipe.name = req.body
             recipe.name = "Pizza Kip" || recipe.name;
     
             // Save the updated document back to the database
