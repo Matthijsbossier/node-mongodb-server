@@ -10,11 +10,11 @@ const RecipeSchema = new Schema({
     name: String,
     description: String,
     imagePath: String,
-    ingredients
-    : [{
-            // Deze lijst gaat dus ingredient objecten bevatten.
-            ingredient: Ingredient
-     }]
+    ingredients: 
+    [{
+        // Deze lijst gaat dus ingredient objecten bevatten.
+        ingredient: Ingredient
+    }]
 }, 
 
 {
