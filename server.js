@@ -39,8 +39,8 @@ app.use(function (req, res, next)
 });
 
 // Installeer de routes.
-app.use('/api/v1', reciperoutes);
-app.use('/api/v2', shoppingroutes);
+app.use('/api/rec', reciperoutes);
+app.use('/api/sho', shoppingroutes);
 
 // Wordt uitgevoerd wanneer err != null; anders door naar next().
 app.use(function (err, req, res, next) 

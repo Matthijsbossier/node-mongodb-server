@@ -1,41 +1,53 @@
+// Setup.
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const ingredientSchema = require('../model/ingredient.model.js');
 
-// definitie van je database:
+// Ingredient voor in het recept.
+const Ingredient = require('../model/ingredient.model');
+
+// Recept schema.
 const RecipeSchema = new Schema({
-    //_id: String,t
-    name: {
-        type:String,
-        required: true,
-        unique: true
-    },
+    name: String,
     description: String,
     imagePath: String,
-    ingredients: [ingredientSchema]
+    ingredients: 
+    [{
+        // Deze lijst gaat dus ingredient objecten bevatten.
+        ingredient: Ingredient
+    }]
+}, 
+
+{
+    timestamps: true
 });
 
-
+// Het recept.
 const Recipe = mongoose.model('recipe', RecipeSchema);
 
-// alles wat naar buiten toe wordt geexporteerd:
+// Een voorbeeld recept aanmaken, als deze nog niet bestaat.
+Recipe.find({name : "Pizza Salami"}, function (err, docs) 
+{
+    if (docs.length)
+    {
+        // Niks doen.
+    }
+
+    // Aanmaken.
+    else
+    {
+        const recipe = new Recipe({
+            name: 'Pizza Salami',
+            description: 'Test recipe',
+            imagePath: 'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/frying-pan-pizza-easy-recipe-collection.jpg',
+            ingredients: 
+            [
+                { name: 'Pizzabodem', amount: 1},
+                { name: 'Kaas', amount: 1},
+                { name: 'Tomatensaus', amount: 1},
+                { name: 'Salami', amount: 5},
+            ]
+        }).save();
+    }
+});
+
 module.exports = Recipe;
-//ik zoek hier naareen recipe met de naam allIngredients als deze nog niet bestaat kan je deze aanmaken hieraan voegen we alle ingredients toe
-Recipe.find({name : "AllIngredients"}, function (err, docs) {
-        if (docs.length){
-            //doe niks
-        }
-        else{
-          const recipe = new Recipe({
-              name: 'AllIngredients',
-              description: 'Test recipe',
-              imagePath: 'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/frying-pan-pizza-easy-recipe-collection.jpg',
-              ingredients: [
-                  { name: 'Pizzabodem', amount: 1},
-                  { name: 'Kaas', amount: 1},
-                  { name: 'Tomatensaus', amount: 1},
-                  { name: 'Salami', amount: 5},
-                  ]
-          }).save();
-        }
-    });
