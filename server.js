@@ -8,8 +8,7 @@ var config = require('./config/env/env');
 var app = express();
 
 // Routes.
-var reciperoutes = require('./api/recipe.routes');
-var shoppingroutes = require('./api/shopping-list.routes');
+var schoolroutes = require('./api/school.routes');
 
 // BodyParser zorgt dat we de body uit een request kunnen gebruiken.
 app.use(bodyParser.urlencoded({'extended': 'true'}));
@@ -39,8 +38,7 @@ app.use(function (req, res, next)
 });
 
 // Installeer de routes.
-app.use('/api/rec', reciperoutes);
-app.use('/api/sho', shoppingroutes);
+app.use('/school', schoolroutes);
 
 // Wordt uitgevoerd wanneer err != null; anders door naar next().
 app.use(function (err, req, res, next) 
@@ -66,8 +64,9 @@ app.use('*', function (req, res)
 // Installatie klaar, start de server.
 app.listen(config.env.webPort, function () 
 {
+    console.log('[Launch successful!]');
     console.log('De server luistert op port ' + app.get('port'));
-    console.log('Zie bijvoorbeeld http://localhost:3000/api/recipes');
+    console.log('Zie bijvoorbeeld http://localhost:3000/school/showall');
 });
 
 // Voor testen met mocha/chai moeten we de app exporteren.
